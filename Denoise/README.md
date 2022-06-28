@@ -28,7 +28,7 @@ required & optional arguments:
   --cuda                Use cuda?
   --print-opt-errs      print losses and error updates for each iteration?
   --save-imgs           save denoised images?
-  --out-dtype			      data type to save/process desnoised output.
+  --out-dtype           data type to save/process desnoised output.
 ```
 ### Example usage
 `
