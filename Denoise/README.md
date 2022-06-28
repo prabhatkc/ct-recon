@@ -13,22 +13,22 @@ Application of non-DNN based denoisers on CT images
 
 required & optional arguments:
   -h, --help            show this help message and exit
-  --input-folder 		directory name containing low dose images at different dose levels
-  --input-gen-folder 	directory name containing specific dose-level images for low dose
+  --input-folder 		    directory name containing low dose images at different dose levels
+  --input-gen-folder 	  directory name containing specific dose-level images for low dose
   --target-gen-folder 	directory name containing Full dose imgs(if available). 
-  						this option is not required for cases where Full dose is unavailable.
-  --output-folder		main output foldername to store results
-  --loss-func 		 	loss function to be used such as mse, l1, ce
-  --prior-type 			prior terms to be combined with the data fedility
+  						          this option is not required for cases where Full dose is unavailable.
+  --output-folder		    main output foldername to store results
+  --loss-func 		 	    loss function to be used such as mse, l1, ce
+  --prior-type 			    prior terms to be combined with the data fedility
                         term. Options include l1, nl, sobel, tv-fd, tv-fbd
-  --input-img-type		dicom or raw or tif?
+  --input-img-type		  dicom or raw or tif?
   --lr 	                learning rate for a single GPU
-  --nite 	            Number of iteration for each image
-  --reg-lambda 			pre-factor for the prior term (if used).
+  --nite 	              Number of iteration for each image
+  --reg-lambda 			    pre-factor for the prior term (if used).
   --cuda                Use cuda?
   --print-opt-errs      print losses and error updates for each iteration?
   --save-imgs           save denoised images?
-  --out-dtype			data type to save/process desnoised output.
+  --out-dtype			      data type to save/process desnoised output.
 ```
 ### Example usage
 `
