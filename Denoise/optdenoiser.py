@@ -65,17 +65,17 @@ def opt_solver(args):
 		#img_no = img_str.split('.')[0]
 		img_no = img_str.split('.')[-2]
 
-		#error analysis for each image
+		#error analysis for each image do this
 		if gt_available:
 			gt_img           = gt_img.astype(args.out_dtype)
 			opt_max, opt_min = max(np.max(gt_img), np.max(opt_sol)), min(np.min(gt_img), np.min(opt_sol))
-			opt_rMSE 	     = utils.relative_mse(gt_img, opt_sol)
-			opt_psnr		 = utils.psnr(gt_img, opt_sol, opt_max)
-			opt_ssim 		 = compare_ssim(opt_sol.reshape(h, w, 1), gt_img.reshape(h, w, 1), multichannel=True, data_range=(opt_max-opt_min))
+			opt_rMSE         = utils.relative_mse(gt_img, opt_sol)
+			opt_psnr         = utils.psnr(gt_img, opt_sol, opt_max)
+			opt_ssim         = compare_ssim(opt_sol.reshape(h, w, 1), gt_img.reshape(h, w, 1), multichannel=True, data_range=(opt_max-opt_min))
 			lr_max, lr_min   = max(np.max(gt_img), np.max(lr_img)), min(np.min(gt_img), np.min(lr_img))
-			lr_rMSE 		 = utils.relative_mse(gt_img, lr_img)
-			lr_psnr 		 = utils.psnr(gt_img, lr_img, lr_max)
-			lr_ssim 		 = compare_ssim(lr_img.reshape(h, w, 1), gt_img.reshape(h, w, 1), multichannel=True, data_range=(lr_max-lr_min))
+			lr_rMSE          = utils.relative_mse(gt_img, lr_img)
+			lr_psnr          = utils.psnr(gt_img, lr_img, lr_max)
+			lr_ssim          = compare_ssim(lr_img.reshape(h, w, 1), gt_img.reshape(h, w, 1), multichannel=True, data_range=(lr_max-lr_min))
 			# append errors for each image
 			lr_rMSE_arr.append(lr_rMSE); lr_psnr_arr.append(lr_psnr); lr_ssim_arr.append(lr_ssim)
 			opt_rMSE_arr.append(opt_rMSE); opt_psnr_arr.append(opt_psnr); opt_ssim_arr.append(opt_ssim)
