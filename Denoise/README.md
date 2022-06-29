@@ -32,9 +32,8 @@ required & optional arguments:
 ```
 ### Example usage
 `
-python main.py --input-folder "./data/L096" --input-gen-folder "quarter_3mm_sharp_sorted" \
---cuda --input-img-type 'dicom' \
---lr 0.001 --nite 100 --reg-lambda 0.01 --save-imgs  --target-gen-folder "full_3mm_sharp_sorted" \
+python main.py --input-folder "./data/L096" --input-gen-folder "quarter_3mm_sharp_sorted" 
+--cuda --input-img-type 'dicom' --lr 0.001 --nite 100 --reg-lambda 0.01 --save-imgs  --target-gen-folder "full_3mm_sharp_sorted"
 --out-dtype 'uint16' --print-opt-errs`<br>
 or<br>
 $ chmod +x demo.sh<br>
