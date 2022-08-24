@@ -53,8 +53,8 @@ optional arguments:
 
 ``` 
 ### Example Usage
-1. Create Deep Learning ready h5 input-target patches. See an example [here](https://github.com/prabhatkc/mpi4py_patches) or use the demo train file in Train folder.
-2. Training/Tuning/Checkpoint path and numerical declarations such as:
+1. Create Deep Learning ready h5 input-target patches. See an example [here](https://github.com/prabhatkc/mpi4py_patches) or use the demo file in train_data folder.
+2. <b>TRAIN</b> your network via declaring paths for training/tuning/(to be saved) checkpoints & numerical parameters as:
 ``` 
     $ NEPOCH=5
     $ TRAIN_FNAME='./train_data/p96_no_norm/train'
@@ -65,12 +65,12 @@ optional arguments:
     --descriptor-type $DES_TYPE --val-chk-prsc 'positive-float' --val-batch-size 64 --loss-func 'mse' \
     --model-name 'redcnn' --prior-type 'tv-fbd' --reg-lambda 1e-4 --shuffle_patches --save_log_ckpts
 ```
-  Instead you may choose to execute demo_train.sh file as
+> > Instead you may choose to (modify &) execute demo_train.sh file as
 ```
     $ chmod +x demo_train.sh
     $ ./demo_train.sh CNN3
 ```
-3. Declare paths for test set, checkpoint and apply the trained weights as:
+3. Apply trained weights to <b>TEST</b> set as: 
 ```
     $ set -f echo *
     $ INPUT_FOLDER="./test_data/patient_data/*/quarter_3mm_sharp_sorted"
@@ -80,11 +80,16 @@ optional arguments:
     --output-folder $OUTPUT_FOLDER --cuda --normalization-type $NORM_TYPE --input-img-type 'dicom' --specific-epoch --se-plot
     $ set +f echo *
 ```
-  Instead you may choose to execute demo_test.sh file as
+> > Instead you may choose to (modify &) execute demo_test.sh file as
 ```
     $ chmod +x demo_test.sh
     $ ./demo_test.sh 
 ```
+### References
+- This implementation is built upon [horovod’s](https://github.com/horovod/horovod#install) publicly available source code.
+  - Sergeev, A. and Del Balso, M., 2018. Horovod: fast and easy distributed deep learning in TensorFlow. arXiv preprint arXiv:1802.05799.
+- Some of the patient image used to formulate training/tuning h5 files is imported from [the Low Dose CT Grand Challenge](https://www.aapm.org/grandchallenge/lowdosect/)
+  -  McCollough, C., Chen, B., Holmes III, D. R., Duan, X., Yu, Z., Yu, L., Leng, S., & Fletcher, J. (2020). Low Dose CT Image and Projection Data (LDCT-and-Projection-data) (Version 4) [Data set]. The Cancer Imaging Archive. https://doi.org/10.7937/9NPB-2637
 
 ### License and Copyright
 This software and documentation (the "Software") were developed at the Food and Drug Administration (FDA) by employees of the Federal Government in the course of their official duties. Pursuant to Title 17, Section 105 of the United States Code, this work is not subject to copyright protection and is in the public domain. Permission is hereby granted, free of charge, to any person obtaining a copy of the Software, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software or derivatives, and to permit persons to whom the Software is furnished to do so. FDA assumes no responsibility whatsoever for use by other parties of the Software, its source code, documentation or compiled executables, and makes no guarantees, expressed or implied, about its quality, reliability, or any other characteristic. Further, use of this code in no way implies endorsement by the FDA or confers any advantage in regulatory decisions. Although this software can be redistributed and/or modified freely, we ask that any derivative works bear some notice that they are derived from it, and any modified versions bear some notice that they have been modified.
