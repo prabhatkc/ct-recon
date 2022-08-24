@@ -2,7 +2,8 @@ import scipy.misc
 import numpy as np
 import imageio
 import pydicom
-
+import os
+import glob
 
 def imread(path, mode='L', type=np.uint8, is_grayscale=True):
   """
@@ -35,8 +36,8 @@ def pydicom_imread(path):
   input_image = pydicom.dcmread(path)
   return(input_image.pixel_array.astype('float32'))
 
-def raw_imread(path, shape=(256, 256)):
-  input_image = np.fromfile(path, dtype='int16').astype('float32')
+def raw_imread(path, shape=(256, 256), dtype='int16'):
+  input_image = np.fromfile(path, dtype=dtype).astype('float32')
   input_image = input_image.reshape(shape)
   return(input_image)
 
@@ -59,3 +60,18 @@ def imsave_raw(image, path):
   fileID = open(path, 'wb')
   image.tofile(fileID)
   fileID.close()
+
+def getimages4rmdir(foldername, randN=None):
+  ''' Returns image list (path) for an input
+  directory. Sorted is true by default to remain consistant.
+  randN is an array of len(images) whose [0, len(images)] index
+  is randomly permuted.
+  '''
+  data_dir = os.path.join(os.getcwd(), foldername)
+  images   = sorted(glob.glob(os.path.join(data_dir, "*.*")))
+  if (len(images)==0): print("ERROR ! No images or incorrect image path.\n"); sys.exit()
+
+  if (randN !=None):
+    images = np.array(images)
+    images = list(images[randN]) 
+  return images

@@ -21,6 +21,7 @@ from loss import combinedLoss
 from dataset import DatasetFromHdf5, DatasetfromFolder
 from torchsummary import summary 
 import util
+import quant_util
 import time 
 
 start_time=time.time()
@@ -90,15 +91,18 @@ allreduce_batch_size = args.batch_size * args.batches_per_allreduce
 if args.model_name =='cnn3':
   from models.cnn3 import CNN3
   model = CNN3(num_channels=args.num_channels)
-if args.model_name =='redcnn':
+elif args.model_name =='redcnn':
   from models.redcnn import REDcnn10
   model = REDcnn10(idmaps=3) # idmaps: no of skip connections (only 1 or 3 available)
-if args.model_name == 'unet':
+elif args.model_name == 'unet':
   from models.unet import UDnCNN
   model = UDnCNN(D=10) # D is no of layers
-if args.model_name == 'dncnn':
+elif args.model_name == 'dncnn':
   from models.dncnn import DnCNN
   model = DnCNN(channels=args.num_channels) # default: layers used is 17, bn=True, dropout=F
+else:
+  print("ERROR! Re-check DNN model (architecture) string!")
+  sys.exit() 
 
 pt_str = args.prior_type if args.prior_type is not None else ''
 if args.save_log_ckpts:
@@ -118,7 +122,7 @@ hvd.init()
 torch.manual_seed(args.seed)
 
 if cuda:
-	  # Horovod: pin GPU to local rank.
+    # Horovod: pin GPU to local rank.
     torch.cuda.set_device(hvd.local_rank())
     torch.cuda.manual_seed(args.seed)
 cudnn.benchmark = True
@@ -167,9 +171,9 @@ kwargs = {'num_workers': 8, 'pin_memory': True} if cuda else {}
 train_dataset = DatasetFromHdf5(hvd, args.training_fname, hvd.size()*args.batch_size) 
 
 train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, \
-	num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
+  num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=allreduce_batch_size, \
-	sampler=train_sampler, **kwargs)
+  sampler=train_sampler, **kwargs)
 if hvd.rank()==0: print(" Dimension of (input <-> target) batches is: {} <-> {}".format(train_dataset.data.shape, \
   train_dataset.target.shape))
 _, _, in_h, in_w = train_dataset.data.shape
@@ -231,8 +235,8 @@ compression = hvd.Compression.fp16 if args.fp16_allreduce else hvd.Compression.n
 
 # Horovod: wrap optimizer with DistributedOptimizer.
 optimizer = hvd.DistributedOptimizer(optimizer, named_parameters=model.named_parameters(), \
-	compression=compression, \
-	backward_passes_per_step=args.batches_per_allreduce)
+  compression=compression, \
+  backward_passes_per_step=args.batches_per_allreduce)
 
 # Restore from a previous checkpoint, if initial_epoch is specified.
 # Horovod: restore on the first worker which will broadcast weights to other workers.
@@ -319,7 +323,7 @@ def validate(epoch):
               #print('data dev type:', data.device, 'target dev type:', target.device, 'output dev type', output.device)
               #print('data, target, output shape', data.size(), target.size(), output.size())
               vloss  = objloss(output, target)
-              _psnr, _ssim = util.quant_ana(output, target, args.val_chk_prsc) #quant ana converts gpu types to cpu inside it
+              _psnr, _ssim = quant_util.quant_ana(output, target, args.val_chk_prsc) #quant ana converts gpu types to cpu inside it
               val_loss.update(vloss, hvd)
               val_psnr.update(_psnr, hvd)
               val_ssim.update(_ssim, hvd)

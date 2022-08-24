@@ -89,7 +89,7 @@ hvd.init()
 torch.manual_seed(args.seed)
 
 if cuda:
-	  # Horovod: pin GPU to local rank.
+    # Horovod: pin GPU to local rank.
     torch.cuda.set_device(hvd.local_rank())
     torch.cuda.manual_seed(args.seed)
 cudnn.benchmark = True
@@ -142,9 +142,9 @@ kwargs = {'num_workers': 1, 'pin_memory': True} if cuda else {}
 train_dataset = DatasetFromHdf5(hvd, args.training_fname, hvd.size()*args.batch_size) 
 
 train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, \
-	num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
+  num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=allreduce_batch_size, \
-	sampler=train_sampler, **kwargs)
+  sampler=train_sampler, **kwargs)
 if hvd.rank()==0: print("Dimension of (input <-> target) batches is: {} <-> {}".format(train_dataset.data.shape, \
   train_dataset.target.shape))
 _, _, in_h, in_w = train_dataset.data.shape
@@ -192,7 +192,7 @@ if hvd.rank()==0:
 # ==================================================================
 # Initializing the optimizer type
 # ==================================================================
-  # adam uses its inbuilt subroutines to determine momemtum parameter
+# adam uses its inbuilt subroutines to determine momemtum parameter
 optimizerG = optim.Adam(modelG.parameters(), betas=(0.9, 0.999),
                   lr=(args.base_lr * args.batches_per_allreduce * hvd.size()))
 
@@ -205,7 +205,7 @@ compression = hvd.Compression.fp16 if args.fp16_allreduce else hvd.Compression.n
 
 # Horovod: wrap optimizer with DistributedOptimizer.
 optimizerG = hvd.DistributedOptimizer(optimizerG, named_parameters=modelG.named_parameters(prefix='generator'), \
-	compression=compression, backward_passes_per_step=args.batches_per_allreduce)
+  compression=compression, backward_passes_per_step=args.batches_per_allreduce)
 optimizerD = hvd.DistributedOptimizer(optimizerD, named_parameters=modelD.named_parameters(prefix='discriminator'), \
   compression=compression, backward_passes_per_step=args.batches_per_allreduce)
 
