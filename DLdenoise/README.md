@@ -59,8 +59,8 @@ optional arguments:
 2. <b>TRAIN</b> your network via declaring paths for training/tuning/(to be saved) checkpoints & numerical parameters as:
 ``` 
     $ NEPOCH=5
-    $ TRAIN_FNAME='./train_data/p96_no_norm/train'
-    $ VAL_FNAME='./train_data/p96_no_norm/tune'
+    $ TRAIN_FNAME='./train_data/p55_no_norm/train'
+    $ VAL_FNAME='./train_data/p55_no_norm/tune'
     $ DES_TYPE='p55_no_norm/augTrTaTdT'
     $ time horovodrun -np 2 -H localhost:2 python main_hvd.py --batch-size 64 --batches-per-allreduce 1 --cuda \
     --nepochs $NEPOCH --base-lr 1e-5 --training-fname $TRAIN_FNAME --validating-fname $VAL_FNAME \
