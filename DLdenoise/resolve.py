@@ -27,8 +27,8 @@ parser.add_argument('--normalization-type', type=str, required=True, help='None 
 parser.add_argument('--cuda', action='store_true', help='use cuda')
 parser.add_argument('--input-img-type', type=str, default='dicom', help='dicom or raw or tif?')
 parser.add_argument('--specific-epoch', action='store_true', help='If true only one specific epoch based on the chckpt-no will be applied to \
-																   test images. Else all checkpoints (or every saved checkpoints corresponding to each epoch)\
-																   will be applied to test images.')
+							     test images. Else all checkpoints (or every saved checkpoints corresponding to each epoch)\
+							     will be applied to test images.')
 parser.add_argument('--chckpt-no', type=int, required=False, default=-1, help='epoch no. of the checkpoint to be loaded\
 																		and then applied to noisy images from the test set. Default is the last epoch.')
 parser.add_argument('--se-plot', action='store_true', help='If true denoised images from test set is saved inside the output-folder.\
