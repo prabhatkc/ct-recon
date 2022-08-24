@@ -53,10 +53,24 @@ optional arguments:
 
 ``` 
 ### Usage
-1. Create Deep Learning ready h5 input-target patches. See demo file in [here](https://github.com/prabhatkc/mpi4py_patches) or use demo train file in Train folder.
-
-
-
+1. Create Deep Learning ready h5 input-target patches. See an example [here](https://github.com/prabhatkc/mpi4py_patches) or use the demo train file in Train folder.
+2. Training/Tuning/Checkpoint path and numerical declarations such as:
+``` 
+    $ NEPOCH=5
+    $ TRAIN_FNAME='./train_data/p96_no_norm/train'
+    $ VAL_FNAME='./train_data/p96_no_norm/tune'
+    $ DES_TYPE='p55_no_norm/augTrTaTdT'
+    $ time horovodrun -np 2 -H localhost:2 python main_hvd.py --batch-size 64 --batches-per-allreduce 1 --cuda \
+    --nepochs $NEPOCH --base-lr 1e-5 --training-fname $TRAIN_FNAME --validating-fname $VAL_FNAME \
+    --descriptor-type $DES_TYPE --val-chk-prsc 'positive-float' --val-batch-size 64 --loss-func 'mse' \
+    --model-name 'redcnn' --prior-type 'tv-fbd' --reg-lambda 1e-4 --shuffle_patches --save_log_ckpts
+```
+  Instead you may choose to execute demo_train.sh file as
+```
+    $ chmod +x demo_train.sh
+    $ ./demo_train.sh CNN3
+```
+3. Apply the trained weights to test set as:
 
 ### License and Copyright
 This software and documentation (the "Software") were developed at the Food and Drug Administration (FDA) by employees of the Federal Government in the course of their official duties. Pursuant to Title 17, Section 105 of the United States Code, this work is not subject to copyright protection and is in the public domain. Permission is hereby granted, free of charge, to any person obtaining a copy of the Software, to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of the Software or derivatives, and to permit persons to whom the Software is furnished to do so. FDA assumes no responsibility whatsoever for use by other parties of the Software, its source code, documentation or compiled executables, and makes no guarantees, expressed or implied, about its quality, reliability, or any other characteristic. Further, use of this code in no way implies endorsement by the FDA or confers any advantage in regulatory decisions. Although this software can be redistributed and/or modified freely, we ask that any derivative works bear some notice that they are derived from it, and any modified versions bear some notice that they have been modified.
