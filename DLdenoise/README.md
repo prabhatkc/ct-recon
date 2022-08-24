@@ -87,6 +87,13 @@ optional arguments:
     $ chmod +x demo_test.sh
     $ ./demo_test.sh 
 ```
+
+## Package Requirements ##
+- Follow the [Hovorod Installation Guide](https://horovod.readthedocs.io/en/stable/install_include.html) to configure Horovod with PyTorch in your environment.
+- Use [pip]( https://pypi.org/project/pip/) or [conda]( https://docs.anaconda.com/anaconda/user-guide/tasks/install-packages/) to install additional packages needed:
+sklearn, matplotlib, natsort, jupyterlab, opencv-python, tqdm, pydicom, pytorch-mssim, tensorboardX, glob, h5py, numpy, imageio, scipy.
+- This implementation was developed using horovod v.0.19.5.
+
 ## References ##
 - This implementation is built upon [horovod’s](https://github.com/horovod/horovod#install) publicly available source code.
   - Sergeev, A. and Del Balso, M., 2018. Horovod: fast and easy distributed deep learning in TensorFlow. arXiv preprint arXiv:1802.05799.
