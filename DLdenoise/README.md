@@ -1,6 +1,10 @@
-### Highlight
+# Horovod with PyTorch based Deep Learning (DL) for CT denoising applications
 
-
+### Highlights
+1. Multi-GPU implementation for generative (GAN), as well as single loss function based DL, models.
+2. Options to integrate different prior terms (like the NLM, TV) to the loss function.
+3. Options to read training pairs in different formats like npz, h5, images.
+4. Validation loss is accompanied with SSIM, RMSE from the tuning set at the time of training
 
 ```
 usage: main_hvd.py [-h] [--model-name MODEL_NAME] [--nepochs NEPOCHS] [--cuda] [--batches-per-allreduce BATCHES_PER_ALLREDUCE]
@@ -47,8 +51,10 @@ optional arguments:
                         HDF5dataloader (default: False)
   --save_log_ckpts      saves log writer and checkpoints (default: False)
 
-
 ``` 
+### Usage
+1. Create Deep Learning ready h5 input-target patches. See demo file in [here](https://github.com/prabhatkc/mpi4py_patches) or use demo train file in Train folder.
+
 
 
 
