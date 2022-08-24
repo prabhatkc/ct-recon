@@ -42,7 +42,6 @@ COMMENT
 # ----------------------------------------------------#
 
 MODEL_FOLDER='./checkpoints/p55_no_norm/augTrTaTdT/cnn3/hvd_cpt_for_mse__wd_0.0_lr_1e-05_bs_64/'
-MODEL_FOLDER='/gpfs_projects/prabhat.kc/lowdosect/transfers/transfers_4_spie/exps/exps/w8_exps_4_spie_dose/checkpoints/p55/augTrTaTdT/three_layers/hvd_cpt_for_mse_l1_wd_0.0_lr_0.001_bs_128/'
 NORM_TYPE=None
 
 # on patient images
