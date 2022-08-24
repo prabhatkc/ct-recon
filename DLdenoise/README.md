@@ -64,13 +64,13 @@ optional arguments:
     $ DES_TYPE='p55_no_norm/augTrTaTdT'
     $ time horovodrun -np 2 -H localhost:2 python main_hvd.py --batch-size 64 --batches-per-allreduce 1 --cuda \
     --nepochs $NEPOCH --base-lr 1e-5 --training-fname $TRAIN_FNAME --validating-fname $VAL_FNAME \
-    --descriptor-type $DES_TYPE --val-chk-prsc 'positive-float' --val-batch-size 64 --loss-func 'mse' \
-    --model-name 'redcnn' --prior-type 'tv-fbd' --reg-lambda 1e-4 --shuffle_patches --save_log_ckpts
+    --descriptor-type $DES_TYPE --val-chk-prsc 'positive-float' --val-batch-size 64 \
+    --loss-func 'mse' --model-name 'cnn3' --shuffle_patches --save_log_ckpts
 ```
 > > Instead you may choose to (modify &) execute demo_train.sh file as
 ```
     $ chmod +x demo_train.sh
-    $ ./demo_train.sh REDCNN
+    $ ./demo_train.sh CNN3
 ```
 3. Apply trained weights to <b>TEST</b> set as: 
 ```
