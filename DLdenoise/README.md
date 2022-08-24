@@ -44,7 +44,7 @@ optional arguments:
   --training-fname      path to training LR-HR training patches in h5 format (default: None)
   --val-chk-prsc 
                         precision type while calculating the SSIM/PSNR for validation test. (default: natural-float)
-  --scale SCALE         up-scaling factor. It is hard-coded to be 1 for denoising (default: 1)
+  --scale               up-scaling factor. It is hard-coded to be 1 for denoising (default: 1)
   --num-channels        3 for rgb images and 1 for gray scale images (default: 1)
   --val-batch-size      input batch size for validation data. (default: 16)
   --validating-fname    Path to H5 file(s) containing validation set (default: None)
