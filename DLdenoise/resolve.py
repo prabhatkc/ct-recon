@@ -47,17 +47,17 @@ for i in args.__dict__: print((i),':',args.__dict__[i])
 print('\n----------------------------------------\n')
 
 input_folder = args.input_folder
-gt_folder	 = args.gt_folder
+gt_folder	   = args.gt_folder
 output_folder= args.output_folder
 model_folder = args.model_folder
 
-cuda 		  = args.cuda 
+cuda 		           = args.cuda 
 normalization_type = args.normalization_type
-specific_epoch= args.specific_epoch
-chckpt_no	  = args.chckpt_no
-num_channels  = 1
-gt_available  = bool((args.gt_folder).strip())
-out_dtype 	  = args.out_dtype
+specific_epoch     = args.specific_epoch
+chckpt_no	         = args.chckpt_no
+num_channels       = 1
+gt_available       = bool((args.gt_folder).strip())
+out_dtype 	       = args.out_dtype
 
 if (specific_epoch == True and chckpt_no != -1): chckpt_no = chckpt_no-1
 
