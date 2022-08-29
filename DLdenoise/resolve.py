@@ -51,7 +51,7 @@ gt_folder	   = args.gt_folder
 output_folder= args.output_folder
 model_folder = args.model_folder
 
-cuda 		           = args.cuda 
+cuda               = args.cuda 
 normalization_type = args.normalization_type
 specific_epoch     = args.specific_epoch
 chckpt_no	         = args.chckpt_no
