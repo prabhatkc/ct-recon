@@ -33,7 +33,7 @@ parser.add_argument('--chckpt-no', type=int, required=False, default=-1, help='e
                                                                          and then applied to noisy images from the test set. Default is the last epoch.')
 parser.add_argument('--se-plot', action='store_true', help='If true denoised images from test set is saved inside the output-folder.\
                                                       Else only test stats are saved in .txt format inside the output-folder.')
-parser.add_argument('--in-dtype', type=str, default="int16", help="data type to save de-noised output.")
+parser.add_argument('--in-dtype', type=str, default="uint16", help="data type to save de-noised output.")
 parser.add_argument('--out-dtype', type=str, default="uint16", help="data type to save de-noised output.")
 parser.add_argument('--resolve-nps', action='store_true', help="is CNN applied to water phantom images?")
 
