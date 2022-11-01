@@ -4,6 +4,7 @@ import imageio
 import pydicom
 import os
 import glob
+import sys
 
 def imread(path, mode='L', type=np.uint8, is_grayscale=True):
   """
@@ -69,7 +70,7 @@ def getimages4rmdir(foldername, randN=None):
   '''
   data_dir = os.path.join(os.getcwd(), foldername)
   images   = sorted(glob.glob(os.path.join(data_dir, "*.*")))
-  if (len(images)==0): print("ERROR ! No images or incorrect image path.\n"); sys.exit()
+  if (len(images)==0): sys.exit("ERROR ! No images or incorrect image path.\n"); 
 
   if (randN !=None):
     images = np.array(images)
