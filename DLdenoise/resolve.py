@@ -41,7 +41,7 @@ parser.add_argument('--resolve-nps', action='store_true', help="is CNN applied t
 args = parser.parse_args()
 
 print('\n----------------------------------------')
-print('Command line arguements')
+print('Command line arguments')
 print('----------------------------------------')
 for i in args.__dict__: print((i),':',args.__dict__[i])
 print('\n----------------------------------------\n')
