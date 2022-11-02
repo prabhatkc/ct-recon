@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 def opt_solver(args):
 	args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 	torch.manual_seed(42)
-	print('Command line arguements')
+	print('Command line arguments')
 	print('\n---------------------------------------------------------------------------------')
 	print('----------------------------------------------------------------------------------')
 	for i in args.__dict__: print((i),':',args.__dict__[i])
