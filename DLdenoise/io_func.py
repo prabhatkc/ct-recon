@@ -70,7 +70,7 @@ def getimages4rmdir(foldername, randN=None):
   '''
   data_dir = os.path.join(os.getcwd(), foldername)
   images   = sorted(glob.glob(os.path.join(data_dir, "*.*")))
-  if (len(images)==0): sys.exit("ERROR ! No images or incorrect image path.\n"); 
+  if (len(images)==0): sys.exit("ERROR ! No images or incorrect image path.\n")
 
   if (randN !=None):
     images = np.array(images)
