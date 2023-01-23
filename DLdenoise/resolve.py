@@ -33,10 +33,10 @@ parser.add_argument('--chckpt-no', type=int, required=False, default=-1, help='e
                                                                          and then applied to noisy images from the test set. Default is the last epoch.')
 parser.add_argument('--se-plot', action='store_true', help='If true denoised images from test set is saved inside the output-folder.\
                                                       Else only test stats are saved in .txt format inside the output-folder.')
-parser.add_argument('--in-dtype', type=str, default="uint16", help="data type to save de-noised output.")
+parser.add_argument('--in-dtype',  type=str, default="uint16", help="data type of input images. Only needed for .raw format imgs.")
 parser.add_argument('--out-dtype', type=str, default="uint16", help="data type to save de-noised output.")
 parser.add_argument('--resolve-nps', action='store_true', help="is CNN applied to water phantom images?")
-
+parser.add_argument('--rNx', required=False, type=int,    default=256, help="image size for raw image as input.")
 
 args = parser.parse_args()
 
@@ -89,7 +89,7 @@ def main():
     else:
         model_names = natsort.natsorted(glob.glob(os.path.join(model_folder, "*.*")))
 
-    if (len(model_names)==0): print("ERROR ! No checkpoints or incorrect model path.\n"); sys.exit()
+    if (len(model_names)==0): sys.exit("ERROR ! No checkpoints or incorrect model path.\n")
     # =============================================================
     # Importing checkpoint paths & creating folders to save results
     # -------------------------------------------------------------
@@ -117,7 +117,7 @@ def main():
         quantfile = open(quant_fname, '+w')	
         quantfile.write('chckpt-no, CNN rMSE, (+,-std), CNN PSNR [dB], (+,-std), CNN SSIM, (+,-std), LD rMSE, (+,-std), LD PSNR [dB], (+,-std), LD SSIM, (+,-std)\n')
 
-    dir_min, dir_max = util.min_max_4rmdir(input_folder, args.input_img_type, args.in_dtype)
+    dir_min, dir_max = util.min_max_4rmdir(input_folder, args.input_img_type, args.in_dtype, rN=args.rNx)
 
     # ===================================
     # Accessing all (or one) checkpoints
@@ -144,8 +144,8 @@ def main():
                 lr_img = io_func.pydicom_imread(lr_img_names[i])
                 if gt_available: gt_img = io_func.pydicom_imread(gt_img_names[i])
             elif args.input_img_type=='raw':
-                lr_img = io_func.raw_imread(lr_img_names[i], (256, 256), dtype=args.in_dtype)
-                if gt_available: gt_img = io_func.raw_imread(gt_img_names[i], (256, 256), dtype=args.in_dtype)
+                lr_img = io_func.raw_imread(lr_img_names[i], (args.rNx, args.rNx), dtype=args.in_dtype)
+                if gt_available: gt_img = io_func.raw_imread(gt_img_names[i], (args.rNx, args.rNx), dtype=args.in_dtype)
             else:
                 lr_img = io_func.imageio_imread(lr_img_names[i])
                 if gt_available: gt_img = io_func.imageio_imread(gt_img_names[i])

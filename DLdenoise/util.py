@@ -200,14 +200,14 @@ def img_2_tensor(img, cuda=False):
   return(tensor)
 
 
-def min_max_4rmdir (foldername, img_type, dtype):
+def min_max_4rmdir (foldername, img_type, dtype, rN=256):
     image_list = io_func.getimages4rmdir(foldername)
     dir_max, dir_min = 0.0, 0.0
     for i in range(len(image_list)):
         if img_type=='dicom':
             img = io_func.pydicom_imread(image_list[i])
         elif img_type=='raw':
-            img = io_func.raw_imread(image_list[i], (256, 256), dtype=dtype)
+            img = io_func.raw_imread(image_list[i], (rN, rN), dtype=dtype)
         else:
             img = io_func.imageio_imread(image_list[i])
 
