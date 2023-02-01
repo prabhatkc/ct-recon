@@ -16,7 +16,7 @@ def opt_solver(args):
 	for i in args.__dict__: print((i),':',args.__dict__[i])
 	print('\n--------------------------------------------------------------------------------\n')
 
-
+	args.out_dtype = args.in_dtype
 	#-----------------------------------
 	# declare r/w paths
 	#-----------------------------------
@@ -41,7 +41,7 @@ def opt_solver(args):
 		  lr_img = utils.pydicom_imread(in_paths[i])
 		  if gt_available: gt_img = utils.pydicom_imread(target_paths[i])
 		elif args.input_img_type=='raw':
-		  lr_img = utils.raw_imread(in_paths[i], (256, 256))
+		  lr_img = utils.raw_imread(in_paths[i], (args.rNx, args.rNx), args.in_dtype)
 		else:
 		  lr_img = utils.imageio_imread(in_paths[i])
 		  if gt_available: gt_img = utils.imageio_imread(target_paths[i])
