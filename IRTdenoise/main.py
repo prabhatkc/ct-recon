@@ -4,7 +4,7 @@ import sys
 # ====================================================================
 # Command line arguments
 # ====================================================================
-parser = argparse.ArgumentParser(description='Application of non-DNN based denoisers on CT images')
+parser = argparse.ArgumentParser(description='Application of total variation(TV)-based iterative denoisers on CT images.')
 parser.add_argument('--input-folder',type=str, required=True, help='directory name containing low dose images at different dose levels')
 parser.add_argument('--input-gen-folder', type=str, default='quarter_3mm_sharp_sorted', help="directory name containing specific dose-level images for low dose")
 parser.add_argument('--target-gen-folder', type=str, default='', help= "directory name containing Full dose imgs(if available).\
@@ -20,7 +20,7 @@ parser.add_argument('--reg-lambda', type=float, default=0.0, help="pre-factor fo
 parser.add_argument('--cuda', action="store_true", help="Use cuda?")
 parser.add_argument('--print-opt-errs', action="store_true", help="print losses and error updates for each iteration?")
 parser.add_argument('--save-imgs', action="store_true", help="save denoised images?")
-parser.add_argument('--in-dtype',  type=str, default="uint16", help="data type of input images.")
+parser.add_argument('--in-dtype',  type=str, default="uint16", help="data type of input images. out image dtype is eq to in-dtype.")
 # parser.add_argument('--out-dtype', type=str, default="uint16", help="data type to save/process desnoised output.")
 # out-dtype option is not accurate right now. You need to have out-dtype same as the in-dtype
 parser.add_argument('--rNx', required=False, type=int,    default=256, help="image size for raw image as input.")
