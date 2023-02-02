@@ -1,4 +1,4 @@
-## Total Variation (TV)-based Denoising (Post-processing) of low dose (noisy) CT images
+# Total Variation (TV)-based Denoising (Post-processing) of low dose (noisy) CT images
 
 ```
 usage: main.py [-h] --input-folder INPUT_FOLDER
@@ -30,18 +30,20 @@ required & optional arguments:
   --save-imgs           save denoised images?
   --in-dtype            data type of input images. out image dtype is eq in-dtype.
 ```
-### Example usage
-`
+## Example usage ##
+```
 python main.py --input-folder "./data/L096" --input-gen-folder "quarter_3mm_sharp_sorted" 
 --cuda --input-img-type 'dicom' --lr 0.001 --nite 100 --reg-lambda 0.01 --save-imgs  --target-gen-folder "full_3mm_sharp_sorted"
 --in-dtype 'uint16' --print-opt-errs`<br>
-or<br>
+```
+> > Instead you may choose to (modify &) execute demo.sh file as
+```
 $ chmod +x demo.sh<br>
 $ ./demo
-
-### References
+```
+## References ##
 - McCollough, C., Chen, B., Holmes III, D. R., Duan, X., Yu, Z., Yu, L., Leng, S., & Fletcher, J. (2020). Low Dose CT Image and Projection Data (LDCT-and-Projection-data) (Version 4) [Data set]. The Cancer Imaging Archive. https://doi.org/10.7937/9NPB-2637
 
-### Contact
+### Contact ##
 Prabhat KC
 prabhat.kc077@gmail.com
