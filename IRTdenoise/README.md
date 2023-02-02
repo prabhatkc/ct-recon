@@ -28,7 +28,7 @@ required & optional arguments:
   --cuda                Use cuda?
   --print-opt-errs      print losses and error updates for each iteration?
   --save-imgs           save denoised images?
-  --in-dtype           data type of input images. out image dtype is eq in-dtype..
+  --in-dtype            data type of input images. out image dtype is eq in-dtype.
 ```
 ### Example usage
 `
