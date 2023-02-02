@@ -9,7 +9,7 @@ usage: main.py [-h] --input-folder INPUT_FOLDER
                [--lr LR] [--nite NITE] [--reg-lambda REG_LAMBDA] [--cuda]
                [--print-opt-errs] [--save-imgs] [--out-dtype OUT_DTYPE]
 
-Application of non-DNN based denoisers on CT images
+Application of total variation(TV)-based iterative denoisers on CT images
 
 required & optional arguments:
   -h, --help            show this help message and exit
@@ -28,13 +28,13 @@ required & optional arguments:
   --cuda                Use cuda?
   --print-opt-errs      print losses and error updates for each iteration?
   --save-imgs           save denoised images?
-  --out-dtype           data type to save/process desnoised output.
+  --in-dtype           data type of input images. out image dtype is eq in-dtype..
 ```
 ### Example usage
 `
 python main.py --input-folder "./data/L096" --input-gen-folder "quarter_3mm_sharp_sorted" 
 --cuda --input-img-type 'dicom' --lr 0.001 --nite 100 --reg-lambda 0.01 --save-imgs  --target-gen-folder "full_3mm_sharp_sorted"
---out-dtype 'uint16' --print-opt-errs`<br>
+--in-dtype 'uint16' --print-opt-errs`<br>
 or<br>
 $ chmod +x demo.sh<br>
 $ ./demo
