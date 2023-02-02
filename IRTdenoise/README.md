@@ -1,4 +1,4 @@
-## Denoise (Post-process) low dose (noisy) CT images
+## Total Variation (TV)-based Denoising (Post-processing) of low dose (noisy) CT images
 
 ```
 usage: main.py [-h] --input-folder INPUT_FOLDER
