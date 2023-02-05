@@ -37,10 +37,10 @@ python main.py --input-folder '../data/phandata/poisson' --input-gen-folder 'noi
 --sigma-spatial 5 --win-size 7 --rNx 512 --output-folder './results/phandata'
 ```
 > > Instead you may choose to (modify &) execute demo.sh file as
-``
+```
 $ chmod +x demo.sh<br>
 $ ./demo
-``
+```
 ## References ##
 - This implementation imports bilteral filtering library from the [scikit-image's](https://scikit-image.org/docs/stable/auto_examples/filters/plot_denoise.html).
 
