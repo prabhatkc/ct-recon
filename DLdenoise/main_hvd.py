@@ -167,8 +167,8 @@ log_writer = tensorboardX.SummaryWriter(args.log_dir) if (hvd.rank() == 0 and ar
 #
 # (3) shuffle=False, drop_last=False as the default value in the torch's dataloader 
 #
-kwargs = {'num_workers': 8, 'pin_memory': True} if cuda else {}
-train_dataset = DatasetFromHdf5(hvd, args.training_fname, hvd.size()*args.batch_size) 
+kwargs = {'num_workers': 1, 'pin_memory': True} if cuda else {}
+train_dataset = DatasetFromHdf5(hvd=hvd, file_path=args.training_fname, mod_num=hvd.size()*args.batch_size) 
 
 train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, \
   num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
@@ -192,7 +192,7 @@ _, _, tg_h, tg_w = train_dataset.target.shape
 # of the input and target and distributed over the given no of gpus
 #
 # val_dataset = DatasetfromFolder(image_dir_hr=args.val_hr, image_dir_lr=args.val_lr)
-val_dataset = DatasetFromHdf5(hvd, args.validating_fname, hvd.size()*args.val_batch_size)
+val_dataset = DatasetFromHdf5(hvd=hvd, file_path=args.validating_fname, mod_num=hvd.size()*args.val_batch_size)
 val_sampler = torch.utils.data.distributed.DistributedSampler(
     val_dataset, num_replicas=hvd.size(), rank=hvd.rank(), shuffle=args.shuffle_patches)
 val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.val_batch_size,

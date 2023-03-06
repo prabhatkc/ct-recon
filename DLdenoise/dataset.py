@@ -17,8 +17,8 @@ import io_func
 
 class DatasetFromHdf5(Dataset):
     #def __init__(self, file_path):
-    #    super(DatasetFromHdf5, self).__init__()
     def __init__(self, hvd, file_path, mod_num=1, drop_style='remove_last'):
+        super(DatasetFromHdf5, self).__init__()
         shuffle_patches=False
         # shuffling patches at the Sampler Distribution is more efficient
         # for h5 files. so let this options be False for this subroutine
@@ -32,10 +32,9 @@ class DatasetFromHdf5(Dataset):
                     print('\n-------------------------------------------------------------')
                     print("ERROR! No training/tuning h5 files. Re-check input data paths.")
                     print('--------------------------------------------------------------')
-                    sys.exit()
-                    
+                    sys.exit()         
         # for multiple h5 files in a directory
-        if os.path.isdir(file_path):
+        elif os.path.isdir(file_path):
             all_h5s = sorted(glob.glob(file_path+'/*'))
             if (len(all_h5s)==0 and hvd.rank()==0): 
                 print('\n-------------------------------------------------------------')
@@ -66,6 +65,12 @@ class DatasetFromHdf5(Dataset):
             else:
                 self.data = all_dt
                 self.target = all_tgt
+        else:
+            if hvd.rank()==0:
+                    print('\n----------------------------------------------------------------------------')
+                    print("ERROR! Issues related to training/tuning path. Re-check training-fname option.")
+                    print('------------------------------------------------------------------------------')
+                    sys.exit()
         if np.mod(self.data.shape[0], mod_num)!=0:
             if drop_style == 'remove_last':
                 # this option removes last b patches where a (mod n) eq b
