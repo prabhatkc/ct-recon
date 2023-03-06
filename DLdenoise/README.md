@@ -70,7 +70,7 @@ optional arguments:
 > > Instead you may choose to (modify &) execute demo_train.sh file as
 ```
     $ chmod +x demo_train.sh
-    $ ./demo_train.sh CNN3
+    $ ./demo_train.sh "CNN3"
 ```
 3. Apply trained weights to <b>TEST</b> set as: 
 ```
