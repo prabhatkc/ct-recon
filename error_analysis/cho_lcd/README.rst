@@ -43,7 +43,7 @@ In matlab
 
 .. raw:: html
 
-   <p><img src="../../plots/ldgc_vs_ourSim_1d_nps.png" alt="nps fig" width="200"/></p>
+   <p><img src=".plots/ldgc_vs_ourSim_1d_nps.png" alt="nps fig" width="250"/></p>
 
 
 LG-CHO using LDGC parameters on simulated CCT189
@@ -56,6 +56,11 @@ LG-CHO using LDGC parameters on simulated CCT189
     >> demo_lcd_cho_of_sim_ldgc
 
 
+.. raw:: html
+
+   <p><img src=".plots/_idx_1_auc.png" alt="nps fig" width="250"/></p>
+
+   
 References 
 ----------
 1. McCollough, C., Chen, B., Holmes III, D. R., Duan, X., Yu, Z., Yu, L., Leng, S., & Fletcher, J. (2020). Low Dose CT Image and Projection Data (LDCT-and-Projection-data) (Version 4) [Data set]. The Cancer Imaging Archive. https://doi.org/10.7937/9NPB-2637
