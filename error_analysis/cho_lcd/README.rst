@@ -41,6 +41,11 @@ In matlab
     >> demo_nps_val_on_ldgc
 
 
+.. raw:: html
+
+   <p><img src="../../plots/ldgc_vs_ourSim_1d_nps.png" alt="nps fig" width="200"/></p>
+
+
 LG-CHO using LDGC parameters on simulated CCT189
 ------------------------------------------------
 
