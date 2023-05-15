@@ -3,7 +3,7 @@
 LCD on LDCT acquisition
 ======================
 
-The subroutines that appear in this file allow you to simulate 2D fan-beam CT scans with noise power spectrum aligned with those found in the Low-dose grand challenge (LDGC) repository. In addition to the dose levels found in the LDGC (i.e., normal and quarter doses), one can use our noise insertion method to acquire any other dose levels. Subsequently, one can denoise these scans and perform an error analysis - interms of low contrast detectability (LCD) - of the denoising method using a numerical model observer called the `CHO <https://github.com/DIDSR/VICTRE_MO>`_(Channelized Hoteling Observer). 
+The subroutines that appear in this file allow you to simulate 2D fan-beam CT scans with noise power spectrum aligned with those found in the Low-dose grand challenge (LDGC) repository. In addition to the dose levels found in the LDGC (i.e., normal and quarter doses), one can use our noise insertion method to acquire any other dose levels. Subsequently, one can denoise these scans and perform an error analysis - interms of low contrast detectability (LCD) - of the denoising method using a numerical model observer called the `CHO <https://github.com/DIDSR/VICTRE_MO>`__(Channelized Hoteling Observer). 
 
 
 First, we show that our object models and noise insertion parameters (heuristically determined) yield normal dose and quarter dose CT scans similar to those provided in the `LDGC dataset <https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=52758026>`_. This is illustrated using 1D NPS. Finally, CHO is applied on simulated CCT189 phantom scans at different dose levels to estimate contrast detectability w.r.t size and HU.
