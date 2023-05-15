@@ -5,7 +5,7 @@ if (strcmpi(measure_option, 'fbp_sharp'))
 % ---------------------------------------------------------------------------------------------------------------------%
  	disp('LCD-CHO on simulated fbp-sharp CT scans acquisition aligned to the LDGC acquisition');
 % ---------------------------------------------------------------------------------------------------------------------%
-	data_folder      ='../../irt/digiNoise/results/mita';
+	data_folder      ='../irt/digiNoise/results/mita';
 	proc_data_folder = '';
 	chkpt_string     = '';
 	output_fname     ='results/matfiles/fbp';

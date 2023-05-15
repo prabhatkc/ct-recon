@@ -33,7 +33,7 @@ if (strcmpi(dnn_type, 'fbp'))
 end
 
 function [] = auc_or_snr_plot_denoising(value_all, output_plot_name, ylabel_str, title_string)
-    tick_vec = [0, 1, 2, 3, 4, 5]
+    tick_vec = [0, 1, 2, 3, 4, 5];
     mark_list = {'.-k','^-b','o-r','.--k','^--b','o--r'};
 	figure, hold on;
 	valuemean = squeeze(mean(value_all));

@@ -29,11 +29,11 @@ addpath("data/matfiles/")
 % change this bool option to "F" if 
 % ND and QD have already
 % been previously simulated
-create_noisy_data = 'F';
+create_noisy_data = 'T';
 
 % bool options for ND and QD acquisitions
-acquire_nd = 'F';
-acquire_ld = 'F';
+acquire_nd = 'T';
+acquire_ld = 'T';
 
 % bool option to show 1D nps plot
 show_nps_validation = 'T';

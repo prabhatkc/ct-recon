@@ -6,7 +6,7 @@ LCD on LDCT acquisition
 The subroutines that appear in this file allow you to simulate 2D fan-beam CT scans with noise power spectrum aligned with those found in the Low-dose grand challenge (LDGC) repository. In addition to the dose levels found in the LDGC (i.e., normal and quarter doses), one can use our noise insertion method to acquire any other dose levels. Subsequently, one can denoise these scans and perform an error analysis - interms of low contrast detectability (LCD) - of the denoising method using a numerical model observer called the `CHO (Channelized Hoteling Observer) <https://github.com/DIDSR/VICTRE_MO>`_. 
 
 
-First, we show that our object models and noise insertion parameters (heuristically determined) yield normal dose and quarter dose CT scans similar to those provided in the `LDGC dataset <https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=52758026>`_. This is illustrated using 1D NPS. Finally, CHO is applied on simulated CCT189 phantom scans at different dose levels to estimate contrast detectability w.r.t size and HU.
+First, we show that our object models and noise insertion parameters (heuristically determined) yield normal dose and quarter dose CT scans similar to those provided in the `LDGC dataset <https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=52758026>`_. This is illustrated using 1D NPS. Finally, CHO is applied on simulated `MITA phantom <https://www.nema.org/standards/view/Computed-Tomography-Image-Quality-CTIQ-Low-Contrast-Detectability-LCD-Assessment-When-Using-Dose-Reduction-Technology>_ scans at different dose levels to estimate contrast detectability w.r.t size and HU.
 
 .. contents::
 
@@ -16,14 +16,16 @@ Downloads
 .. code-block:: bash
 
     $ wget https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
+    $ tar -xvzf fessler.tgz
     $ svn export https://github.com/prabhatkc/ct-recon/trunck/digiNoise
     $ svn export https://github.com/prabhatkc/ct-recon/trunk/objmodels
     $ svn export https://github.com/prabhatkc/ct-recon/trunk/error_analysis/cho_lcd
     $ wget https://github.com/smuzd/LD-CT-simulation/blob/master/I0.mat?raw=true
+    $ mkdir ./digiNoise/data/matfiles
     $ mv I0* /digiNoise/data/matfiles/I0.mat
     $ mv objmodels/ irt/
     $ mv digiNoise/ irt/
-    $ mv ./error_analysis/cho_lcd/fbp2_window.m ./irt/fbp/
+    $ mv ./cho_lcd/fbp2_window.m ./irt/fbp/
     $ cd irt
     $ matlab
 
@@ -45,13 +47,13 @@ In matlab
    <p><img src=".plots/ldgc_vs_ourSim_1d_nps.png" alt="nps fig" width="250"/></p>
 
 
-CHO using LDGC parameters on simulated CCT189
-------------------------------------------------
+CHO using LDGC parameters on simulated MITA scans
+-------------------------------------------------
 
 .. code-block:: matlab
 
     >> demo_mita_realizations
-    >> cd ../../error_analysis/cho_lcd/
+    >> cd ../../cho_lcd/
     >> demo_lcd_cho_of_sim_ldgc
 
 

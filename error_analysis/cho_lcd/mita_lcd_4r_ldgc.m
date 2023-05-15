@@ -49,7 +49,7 @@ for i=1:nroi
     sa_crop_yfov(i,:) = sa_center_y(i) + [-crop_r:crop_r];
 end
 %check roi
-fid = fopen('../../irt/digiNoise/data/true/mita_512.raw');
+fid = fopen('../irt/digiNoise/data/true/mita_512.raw');
 xtrue = fread(fid,[nx nx],'int16');
 fclose(fid);
 
