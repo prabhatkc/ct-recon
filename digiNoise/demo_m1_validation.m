@@ -25,7 +25,7 @@ if strcmp(create_noisy_data, 'T')
         misc_info.norm_type     ='';
         misc_info.scalefac_k    = 1000.0;
         misc_info.plot_figures  ='T';
-        misc_info.output_folder =[];%'./results/acr_m1/digi_nd/fov_250_na_2880_ds_0.95_hann200_k_0.85_I_2.25e5_ps_scalek1000/';
+        misc_info.output_folder =[];%'./results/acr_m1/digi_nd/';
         
         insert_noise_2_obj_model(xtrue, obj_info, sys_info, misc_info);
     end 
@@ -43,7 +43,7 @@ if strcmp(create_noisy_data, 'T')
         misc_info.norm_type     = '';
         misc_info.scalefac_k    = 1000.0;
         misc_info.plot_figures  ='T';
-        misc_info.output_folder =[];%'./results/acr_m1/digi_qd/fov_250_na_2880_ds_0.95_hann200_k_0.85_I_2.25e5_scalek1000/';
+        misc_info.output_folder =[];%'./results/acr_m1/digi_qd/';
         insert_noise_2_obj_model(xtrue, obj_info, sys_info, misc_info);
     end 
 else
@@ -60,7 +60,7 @@ else
     misc_info.scalefac_k    = 1000.0;
     misc_info.plot_figures  ='T';
     misc_info.noiseless     ='True';
-    misc_info.output_folder =[];%'./results/acr_m1/digi_nd/fov_250_na_2880_ds_0.95_hann200_k_0.85_I_2.25e5_ps_scalek1000/';
+    misc_info.output_folder =[];%'./results/acr_m1/noiseless_recon/';
     
     insert_noise_2_obj_model(xtrue, obj_info, sys_info, misc_info);
 end 
