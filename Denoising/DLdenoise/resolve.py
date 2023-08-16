@@ -34,9 +34,12 @@ parser.add_argument('--chckpt-no', type=int, required=False, default=-1, help='e
 parser.add_argument('--se-plot', action='store_true', help='If true denoised images from test set is saved inside the output-folder.\
                                                       Else only test stats are saved in .txt format inside the output-folder.')
 parser.add_argument('--in-dtype',  type=str, default="uint16", help="data type of input images. Only needed for .raw format imgs.")
-parser.add_argument('--out-dtype', type=str, default="uint16", help="data type to save de-noised output.")
+# parser.add_argument('--out-dtype', type=str, default="uint16", help="data type to save de-noised output.")
+# out-dtype option is not accurate right now. You need to have out-dtype set same as the in-dtype for now
+parser.add_argument('--resolve-patient', action='store_true', help="is CNN applied to images from different patients? \
+                                                                    If yes then images will be saved with patient tag.")
 parser.add_argument('--resolve-nps', action='store_true', help="is CNN applied to water phantom images?")
-parser.add_argument('--rNx', required=False, type=int,    default=256, help="image size for raw image as input.")
+parser.add_argument('--rNx', required=False, type=int,    default=None, help="image size for raw image as input.")
 
 args = parser.parse_args()
 
@@ -56,7 +59,7 @@ specific_epoch     = args.specific_epoch
 chckpt_no          = args.chckpt_no
 num_channels       = 1
 gt_available       = bool((args.gt_folder).strip())
-out_dtype          = args.out_dtype
+out_dtype          = args.in_dtype
 
 if (specific_epoch == True and chckpt_no != -1): chckpt_no = chckpt_no-1
 
@@ -156,8 +159,11 @@ def main():
             lr_img     = lr_img.astype(out_dtype)
             cnn_output = cnn_output.astype(out_dtype)
             img_str = lr_img_names[i]
+            if args.resolve_patient: 
+                patient_str = img_str.split('/')[-3]
             img_str = img_str.split('/')[-1]
             img_no  = img_str.split('.')[-2]
+            
             if (i==0): 
                     print('Per image stats:')
                     print('----------------------------------------\n')
@@ -188,8 +194,12 @@ def main():
             # saving feed forward results from specific epoch (if true)
             # ==========================================================
             if (specific_epoch == True and args.se_plot ==True):
-                io_func.imsave_raw((cnn_output), cnn_hd_test_out + '/' + img_no + '.raw')
-
+                if args.resolve_patient:
+                    patient_dir = cnn_hd_test_out + '/' + patient_str
+                    if not os.path.isdir(patient_dir): os.makedirs(patient_dir, exist_ok=True)
+                    io_func.imsave_raw((cnn_output), patient_dir     + '/' + img_no + '.raw')
+                else:
+                    io_func.imsave_raw((cnn_output), cnn_hd_test_out + '/' + img_no + '.raw')
         # command line print + quantfile print
         if gt_available:
             # extract checkpoint no to print
