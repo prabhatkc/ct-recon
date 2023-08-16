@@ -50,7 +50,7 @@ INPUT_FOLDER="./test_data/patient_data/*/quarter_3mm_sharp_sorted"
 GT_FOLDER="./test_data/patient_data/*/full_3mm_sharp_sorted"
 OUTPUT_FOLDER='./results/patient_test/cnn3'
 python resolve.py --m 'cnn3' --input-folder $INPUT_FOLDER --model-folder $MODEL_FOLDER --gt-folder $GT_FOLDER \
---output-folder $OUTPUT_FOLDER --cuda --normalization-type $NORM_TYPE --input-img-type 'dicom' --specific-epoch --se-plot
+--output-folder $OUTPUT_FOLDER --cuda --normalization-type $NORM_TYPE --input-img-type 'dicom' --specific-epoch --se-plot --resolve-patient
 set +f echo *
 
 #on CATPHAN
