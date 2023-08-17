@@ -15,24 +15,13 @@ parser.add_argument('--input-img-type', type=str, default='dicom', help='dicom o
 parser.add_argument('--save-imgs', action="store_true", help="save denoised images?")
 parser.add_argument('--in-dtype', type=str, default="uint16", help="data type of input images. out-dtype is eq to in-dtype.")
 
-'''parser.add_argument('--loss-func',type=str, default='mse', help='loss function to be used such as mse, l1, ce')
-parser.add_argument('--prior-type',type=str, default='tv-fbd', help="prior terms to be combined with the data fedility term.\
-                                                                  Options include l1, nl, sobel, tv-fd, tv-fbd")
-
-parser.add_argument('--lr', type=float, default=0.001, help='learning rate for a single GPU')
-parser.add_argument('--nite', type=int, default=100, help='Number of iteration for each image ')
-parser.add_argument('--reg-lambda', type=float, default=0.0, help="pre-factor for the prior term (if used).")
-parser.add_argument('--cuda', action="store_true", help="Use cuda?")
-parser.add_argument('--print-opt-errs', action="store_true", help="print losses and error updates for each iteration?")
-
-parser.add_argument('--win-size', type=int, default=7, help="window size for filtering")
-parser.add_argument('--sigma-color', type=float, default=0.05, help="std for intensity.\
-                                                                     Larger value results in averaging of larger intensity differences.")
-'''
 parser.add_argument('--sigma', type=float, default=5, help="std for noisy image. Range: [0, 1]\
                                                             Increasing std increases smoothing.")
-
-parser.add_argument('--rNx', required=False, type=int, default=256, help="image size for raw image as input.")
+parser.add_argument('--rNx', required=False, type=int, default=None, help="image size for raw image as input.")
+parser.add_argument('--crop-xcat', action='store_true', help="crop the xcat data when evaluating global metrics?")
+parser.add_argument('--crop-acr', action='store_true', help="crop the acr data when evaluating global metrics?")
+parser.add_argument('--by-patient-name', action='store_true', help="is CNN applied to images from different patients? \
+                                                                    If yes then images will be saved with patient tag.")
 args = parser.parse_args()
 
 from bm3d_denoiser import bm3d_solver; bm3d_solver(args)
