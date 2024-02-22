@@ -8,7 +8,7 @@ nx   = 512;
 dx   = 0.48828; % based on dicom header for acr 3mm sharp data
 fov  = nx*dx; 
 xbkg = makecircle(nx, 200, 0.0, -1024); 
-d = 40;     % distance in mm between the obj center and insert center
+d    = 40;     % distance in mm between the obj center and insert center
 
 % -----------------------------------------------------
 % insert_info [x_center, y_center, radius, HU values]

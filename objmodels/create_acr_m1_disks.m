@@ -1,5 +1,6 @@
 
 clc; clear all;
+addpath('src/');
 %----------------------------------
 % Object background
 %----------------------------------
@@ -22,6 +23,6 @@ disks = rot90(d1+d2+d3+d4,2);
 acrm1 = xbkg + disks;
 
 figure, imshow((acrm1), []);
-write_raw_img('../digiNoise/true/acr_m1_512.raw', acrm1, 'int16');
+write_raw_img('../digiNoise/data/true/acr_m1_512.raw', acrm1, 'int16');
 
 

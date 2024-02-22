@@ -10,7 +10,7 @@
 function [] = analytical_based_acr_lp(hu_contrast)
     % reading the physical CT scan to get (x,y) location of each of the lp in
     % the [512 x 512] img
-    avg_img       = imread('./createbp/data/QD/AVG_3mm_QD.tif');
+    avg_img       = imread('AVG_3mm_QD.tif'); %from file /home/prabhat.kc/Implementations/matlab/irt/objmodels/createbp/data/QD/AVG_3mm_QD.tif
     creation_type = 'obj_lp_ana_based';
     output_folder = ['./data/', creation_type, '/', num2str(hu_contrast)];
     
@@ -168,7 +168,7 @@ function [] = analytical_based_acr_lp(hu_contrast)
     % ----------------------------------------------------------------
     water_area   = makecircle(fNr, 200, 0.0, -1024.0);
     bw_lp_Xobj   = lp_Xobj + water_area; 
-    figure(2),     imshow(bw_lp_Xobj, []); title(['Line Pair', num2str(hu_contrast), 'HU']);
+    figure(2),     imshow(bw_lp_Xobj, []); title(['Line Pair patterns with ', num2str(hu_contrast), 'HU contrast']);
     
     write_raw_img([output_folder, '/lp_', num2str(hu_contrast), '.raw'], bw_lp_Xobj, 'int16');
 end 
