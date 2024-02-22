@@ -1,6 +1,7 @@
 Downloads
 ---------
-Running subroutines found in this folder, in turn, requires function from irt package.
+Running subroutines found in this folder, in turn, require functions found in the irt package.
+Following are the steps to add irt to your matlab path:
 
 .. code-block:: bash
 
