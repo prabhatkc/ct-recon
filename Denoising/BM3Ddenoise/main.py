@@ -20,7 +20,7 @@ parser.add_argument('--sigma', type=float, default=5, help="std for noisy image.
 parser.add_argument('--rNx', required=False, type=int, default=None, help="image size for raw image as input.")
 parser.add_argument('--crop-xcat', action='store_true', help="crop the xcat data when evaluating global metrics?")
 parser.add_argument('--crop-acr', action='store_true', help="crop the acr data when evaluating global metrics?")
-parser.add_argument('--by-patient-name', action='store_true', help="is CNN applied to images from different patients? \
+parser.add_argument('--by-patient-name', action='store_true', help="is denoiser applied to images from different patients? \
                                                                     If yes then images will be saved with patient tag.")
 args = parser.parse_args()
 
