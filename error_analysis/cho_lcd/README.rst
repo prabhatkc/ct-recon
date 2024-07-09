@@ -17,15 +17,13 @@ Downloads
 
     $ wget https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
     $ tar -xvzf fessler.tgz
-    $ svn export https://github.com/prabhatkc/ct-recon/trunck/digiNoise
-    $ svn export https://github.com/prabhatkc/ct-recon/trunk/objmodels
-    $ svn export https://github.com/prabhatkc/ct-recon/trunk/error_analysis/cho_lcd
+    $ git clone https://github.com/prabhatkc/ct-recon.git
+    $ mv ct-recon/objmodels/ irt/
+    $ mv ct-recon/digiNoise/ irt/
+    $ mv ct-recon/error_analysis/cho_lcd/fbp2_window.m irt/fbp/
     $ wget https://github.com/smuzd/LD-CT-simulation/blob/master/I0.mat?raw=true
-    $ mkdir ./digiNoise/data/matfiles
-    $ mv I0* /digiNoise/data/matfiles/I0.mat
-    $ mv objmodels/ irt/
-    $ mv digiNoise/ irt/
-    $ mv ./cho_lcd/fbp2_window.m ./irt/fbp/
+    $ mv I0.mat\?raw\=true I0.mat
+    $ mv I0* irt/digiNoise/data/matfiles/I0.mat
     $ cd irt
     $ matlab
 
