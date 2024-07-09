@@ -21,32 +21,28 @@ Following are the steps to add irt to your matlab path:
 
 DEMO on NPS validation of our noise model against LDGC using water cylinder
 -----------------------------------------------------------------------------
-In matlab
 
 .. code-block:: matlab
 
-    >> demo_nps_val_on_ldgc
+    demo_nps_val_on_ldgc
 
-DEMO on CT realizations using virtual CCT189 replica required for the observer model based performance testing
----------------------------------------------------------------------------------------------------------------
-In matlab
+DEMO on CT realizations using virtual CCT189 replica required for an `observer model based performance testing <https://github.com/prabhatkc/ct-recon/tree/main/error_analysis/cho_lcd#lcd-on-ldct-acquisition>`_
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 .. code-block:: matlab
 
-    >> demo_nps_val_on_ldgc
+    demo_nps_val_on_ldgc
 
 DEMO on NPS validation of our noise model against LDGC using CT realizations from an XCAT
 -----------------------------------------------------------------------------------------
-In matlab
 
 .. code-block:: matlab
 
-    >> demo_modified_xcat_realizations
+    demo_modified_xcat_realizations
 
 DEMO on performing simulated CT reconstruction using acr's virtual module 1 replica
 -----------------------------------------------------------------------------------------
-In matlab
 
 .. code-block:: matlab
 
-    >> demo_fbp_on_acr_module1
+    demo_fbp_on_acr_module1
