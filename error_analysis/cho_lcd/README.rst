@@ -15,16 +15,16 @@ Downloads
 
 .. code-block:: bash
 
-    $ wget https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
-    $ tar -xvzf fessler.tgz
-    $ git clone https://github.com/prabhatkc/ct-recon.git
-    $ mv ct-recon/objmodels/ irt/
-    $ mv ct-recon/digiNoise/ irt/
-    $ mv ct-recon/error_analysis/cho_lcd/fbp2_window.m irt/fbp/
+    $ cd ct-recon/digiNoise
     $ wget https://github.com/smuzd/LD-CT-simulation/blob/master/I0.mat?raw=true
     $ mv I0.mat\?raw\=true I0.mat
-    $ mv I0* irt/digiNoise/data/matfiles/I0.mat
-    $ cd irt
+    $ mv I0* ./data/matfiles/ 
+    $ cd ../..
+    $ wget https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
+    $ tar -xvzf fessler.tgz
+    $ mv ct-recon/error_analysis/cho_lcd/fbp2_window.m irt/fbp/
+    $ mv irt ct-recon/ # move the irt package inside your ct-recon copy
+    $ cd ct-recon/irt
     $ matlab
 
 NPS validation against LDGC
@@ -34,7 +34,7 @@ In matlab
 .. code-block:: matlab
 
     >> setup
-    >> cd objmodels
+    >> cd ../objmodels
     >> create_mita
     >> cd ../digiNoise
     >> demo_nps_val_on_ldgc
@@ -51,7 +51,7 @@ CHO using LDGC parameters on simulated MITA scans
 .. code-block:: matlab
 
     >> demo_mita_realizations
-    >> cd ../../cho_lcd/
+    >> cd ../error_analysis/cho_lcd/
     >> demo_lcd_cho_of_sim_ldgc
 
 
