@@ -134,7 +134,7 @@ if strcmp(show_nps_validation, 'T')
     disp('CT scans of ACR uniform phantom in the LDGC dataset.');
     disp('For more info look inside the demo_nps_val_on_ldgc.m file.');
 
-    load ldgc_nps.mat;
+    load data/matfiles/acr_nd_ld_nps_3mm_sharp.mat;
     figure;
     plot(fr, nd_nps1d, 'k');
     hold on;
