@@ -40,7 +40,8 @@ function [] = insert_noise_2_obj_model(obj, obj_info, sys_info, misc_info)
 %                  reconstruction (and before transfering the reconstruction ...
 %                  to CT values).
 %  intercept_k   : set this option to 1024 for patient images when you use 
-%                  pre-intercepted xtrue or normal dose images with 1024.
+%                  pre-intercepted xtrue or normal dose images with 1024 (i.e.
+%                  air is set as 0.
 %                  Else set it to 0 where your inputs is not intercepted
 %                  and the CT value of air is -1024. 
 %  noiseless     : reconstruction without adding noise to input xobject.
@@ -112,6 +113,10 @@ function [] = insert_noise_2_obj_model(obj, obj_info, sys_info, misc_info)
     %
     if ~isfield(misc_info, 'out_dtype'); out_dtype = 'int16';
     else, out_dtype = misc_info.out_dtype; end
+    
+    % all the exps before 6/10/2024 with mu_water 0.21
+    if ~isfield(misc_info, 'mu_water'); mu_water_in_cm = 0.21;
+    else, mu_water_in_cm = misc_info.mu_water_in_cm; end
 
     if ~exist(misc_info.output_folder, 'dir')
         mkdir(misc_info.output_folder)
@@ -129,7 +134,7 @@ function [] = insert_noise_2_obj_model(obj, obj_info, sys_info, misc_info)
             'dsd', 1085.6, 'dso',595, ...
             'source_offset',0.0,'orbit',360, 'down', DOWN, 'strip_width', 'd');%0.909976; na 2304 
     G    = Gtomo2_dscmex(sgn, ig);
-    load I0;
+    load data/matfiles/I0.mat;
     I02 = imresize(I0, sgn.dim);
     I02 = I02*MAX_FLUX/max(I02(:));
     sig = sqrt(8); % standard variance of electronic noise, a characteristic of CT scanner
@@ -139,7 +144,7 @@ function [] = insert_noise_2_obj_model(obj, obj_info, sys_info, misc_info)
     % setup recon template
     %---------------------------
     tmp         = fbp2(sgn, ig, 'type','std:mat');
-    mu_water    = 0.21/10.0; % mm-1
+    mu_water    = mu_water_in_cm/10.0; % mm-1 %IRT needs in per mm
     % intercept_k = 0; % as the digital phantom is already in accurate CT number with -ve intercept slope
     % scalefac_k  = 1024;
     figure (1); 
