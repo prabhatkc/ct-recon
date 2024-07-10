@@ -26,6 +26,9 @@ DEMO on using `IRT <https://github.com/JeffFessler/mirt>`_ for the low-dose and 
     demo_fbp_w_filters
 
 
+..image:: results/fbp_nd_ldfilters_imgplots.png
+  :width: 500
+
 DEMO on NPS validation of our noise model against LDGC using water cylinder
 -----------------------------------------------------------------------------
 
