@@ -19,6 +19,13 @@ Following are the steps to add irt to your matlab path:
     >> setup
     >> cd ../digiNoise
 
+DEMO on using `IRT <https://github.com/JeffFessler/mirt>`_ for the low-dose and normal-dose CT simulation and different filter-based FBP reconstruction
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+.. code-block:: matlab
+
+    demo_fbp_w_filters
+
+
 DEMO on NPS validation of our noise model against LDGC using water cylinder
 -----------------------------------------------------------------------------
 
