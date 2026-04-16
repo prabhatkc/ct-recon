@@ -41,13 +41,20 @@ def adjust_learning_rate_3_zones(epoch, ep1, ep2, args, optimizer, nGPUS):
 # Horovod: average metrics from distributed training.
 class Metric(object):
     def __init__(self, name):
+        # Note that this class metric needs to be reinitialized
+        # for each epoch to re-set the metric values back to 0
+        # before the start of each iteration 
         self.name = name
         self.sum = torch.tensor(0.)
         self.n = torch.tensor(0.)
 
     def update(self, val, hvd):
-        # here values such as mertic loss from outside training/validation 
-        # loop for each batch is extracted. 
+        # here values such as mertic loss are averaged across batches 
+        # and GPUs. Concretely, if there are 2 batches for 2 GPUs
+        # Ep1:
+        #   batch_0_loss_ave = (batch_0_rank0_loss + batch_1_rank1_loss)/2
+        #   batch_1_loss_ave = ((batch_0_loss_ave) + (batch_1_rank0_loss + batch_1_rank1_loss)/2)/2 
+        #                    = ep1 loss (it will be the same for rank0 and rank1) 
         self.sum += hvd.allreduce(val.detach().cpu(), name=self.name)
         self.n += 1
 

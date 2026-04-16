@@ -260,7 +260,10 @@ def train(epoch):
           #discriminator training
           d_real = modelD(target)
           d_real_loss = criterionD(d_real, real_label)
-          d_fake = modelD(modelG(data))
+          # this should be data.detach() https://d2l.ai/chapter_generative-adversarial-networks/gan.html
+          # No not need to compute gradient for model_D(net_G(data))`, detach data as data.detach() from
+          # computing gradients for discrimnator loss
+          d_fake = modelD(modelG(data)) 
           d_fake_loss = criterionD(d_fake, fake_label) 
           d_total = d_real_loss + d_fake_loss
           trainD_loss.update(d_total, hvd)
@@ -285,6 +288,8 @@ def train(epoch):
           # loss options for cmd line view and in the log directory
           # tsum : total loss of all batches per GPU
           # avg  : avergage loss per GPU per batch
+          # see class metric in utils.py to get info on how metrics
+          # are averaged across GPUS and batches for each epoch
           t.set_postfix({'d_loss': trainD_loss.avg.item(), 
                          'g_loss': trainG_loss.avg.item()})
           t.update(1)

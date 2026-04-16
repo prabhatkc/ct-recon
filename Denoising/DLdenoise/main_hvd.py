@@ -292,10 +292,8 @@ def train(epoch):
             loss.backward()
             
           optimizer.step()
-          # below shows average loss per batch per GPU for each given iteration.
-          # eg. if each of 2 GPUS are processing [4*128, 1, 5, 5] 
-          # .s.t train dataset is [1024, 1, 5, 5] and the total loss for 
-          # for epoch 'e' is lss, then the stored loss value is lss/(4*2)
+          # see class metric in utils.py to get info on how metrics
+          # are averaged across GPUS and batches for each epoch
           t.set_postfix({'loss': train_loss.avg.item()})
           t.update(1)
 
