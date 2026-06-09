@@ -260,10 +260,13 @@ def train(epoch):
           #discriminator training
           d_real = modelD(target)
           d_real_loss = criterionD(d_real, real_label)
-          # this should be data.detach() https://d2l.ai/chapter_generative-adversarial-networks/gan.html
-          # No not need to compute gradient for model_D(net_G(data))`, detach data as data.detach() from
-          # computing gradients for discrimnator loss
-          d_fake = modelD(modelG(data)) 
+          # d_fake = modelD(modelG(data)) 
+          #  per https://d2l.ai/chapter_generative-adversarial-networks/gan.html, 
+          #  No not need to compute gradient for model_D(net_G(data))`. 
+          #  Detaching data as data.detach() from computing gradients for 
+          #  discrimnator loss
+          d_fake_p1=modelG(data).detach()
+          d_fake = modelD(d_fake_p1)
           d_fake_loss = criterionD(d_fake, fake_label) 
           d_total = d_real_loss + d_fake_loss
           trainD_loss.update(d_total, hvd)
